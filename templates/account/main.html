@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Blog Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="https://cdn.pixabay.com/photo/2016/06/13/17/30/mail-1454734_1280.png" type="image/x-icon">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="nav-bar">
+
+        <div class="title-container">
+            <div class="app-title">
+                <b><i class="fa-solid fa-paper-plane"></i>  Blog Management Platform</b>
+            </div>
+            <div class="app-arrow"></div>
+        </div>
+
+        <div class="auth-user">
+            {% if request.user.is_authenticated %}
+
+            <div class="own-profile">
+                <a class="links" href="{% url 'own-profile' %}"><h3>Profile <i class="fa-solid fa-circle-user"></i></h3></a>
+            </div>
+
+            <div class="logout">
+                <a class="links" href="{% url 'logout' %}"><h3>Log-Out <i class="fa-solid fa-right-from-bracket"></i></h3></a>
+            </div>
+
+            {% else %}
+            <div class="login">
+                <a class="links" href="{% url 'login' %}"><h3>Login <i class="fa-solid fa-right-to-bracket"></i></h3></a>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+    <div class="main-end">
+        <h4><i class="fa-solid fa-at"></i> College Blog Management <i class="fa-solid fa-envelopes-bulk"></i></h4>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/js/all.min.js" integrity="sha512-8pHNiqTlsrRjVD4A/3va++W1sMbUHwWxxRPWNyVlql3T+Hgfd81Qc6FC5WMXDC+tSauxxzp1tgiAvSKFu1qIlA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {% load static %}
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

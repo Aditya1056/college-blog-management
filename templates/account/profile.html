@@ -1,0 +1,102 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<div class="all-blogs">
+    <div class="empty"></div>
+    <div class="blogs-links">
+        <div class="all-blogs-link">
+            <a href="{% url 'all_blogposts' %}" title="See all blog posts"><h2><i class="fa-solid fa-angles-right"></i> All Blog-Posts  <i class="fa-solid fa-blog"></i></h2></a>
+        </div>
+        <div class="all-blogs-link">
+            <a href="{% url 'all_questions' %}" title="See all questions"><h2><i class="fa-solid fa-angles-right"></i> All Questions <i class="fa-solid fa-circle-question"></i></h2></a>
+        </div>
+    </div>
+</div>
+
+{% if profile.user|isStudent %}
+
+<div class="user-profile">
+
+    <div class="user-profile-head">
+        <div class="home-link"><a href="{% url 'home' %}"><h4><i class="fa-solid fa-angles-left"></i> Home <i class="fa-solid fa-house"></i></h4></a></div>
+        <div class="user-head-name">
+            <h2>
+                <i class="fa-solid fa-circle-user user-icon"></i>
+                <br>
+                {{profile.user.username}}'s Profile
+            </h2>
+        </div>
+    </div>
+
+    <div class="user-name-head heads"><h3>Name</h3></div>
+    <div class="user-name details">{{profile.name}}</div>
+
+    <div class="user-email-head heads"><h3>Mail-ID</h3></div>
+    <div class="user-email details">{{profile.email}}</div>
+
+    {% if profile.user|isStudent %}
+
+    <div class="user-regnum-head heads"><h3>Registration Number</h3></div>
+    <div class="user-regnum details">{{profile.registration_number}}</div>
+
+    {% endif %}
+
+    {% if profile.user|isCoordinator %}
+
+    <div class="user-conum-head heads"><h3>Coordinator Number</h3></div>
+    <div class="user-conum details">{{profile.coordinator_number}}</div>
+
+    {% endif %}
+
+    <div class="user-postcount-head heads"><h3>Total Posts</h3></div>
+    <div class="user-postcount details">{{profile.blogpost_count}}</div>
+
+</div>
+
+{% endif %}
+
+
+{% if profile.user|isCoordinator %}
+
+<div class="user-profile coordinator-profile">
+
+    <div class="user-profile-head">
+        <div class="home-link"><a href="{% url 'home' %}"><h4><i class="fa-solid fa-angles-left"></i> Home <i class="fa-solid fa-house"></i></h4></a></div>
+        <div class="user-head-name">
+            <h2>
+                <i class="fa-solid fa-circle-user user-icon"></i>
+                <br>
+                {{profile.user.username}}'s Profile (Co)
+            </h2>
+        </div>
+    </div>
+
+    <div class="user-name-head heads"><h3>Name</h3></div>
+    <div class="user-name details">{{profile.name}}</div>
+
+    <div class="user-email-head heads"><h3>Mail-ID</h3></div>
+    <div class="user-email details">{{profile.email}}</div>
+
+    {% if profile.user|isStudent %}
+
+    <div class="user-regnum-head heads"><h3>Registration Number</h3></div>
+    <div class="user-regnum details">{{profile.registration_number}}</div>
+
+    {% endif %}
+
+    {% if profile.user|isCoordinator %}
+
+    <div class="user-conum-head heads"><h3>Coordinator Number</h3></div>
+    <div class="user-conum details">{{profile.coordinator_number}}</div>
+
+    {% endif %}
+
+    <div class="user-postcount-head heads"><h3>Total Posts</h3></div>
+    <div class="user-postcount details">{{profile.blogpost_count}}</div>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

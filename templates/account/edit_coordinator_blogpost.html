@@ -1,0 +1,31 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<div class="register-container">
+    <div class="register-form">
+        <div class="header">
+            <h2>Edit / Update the BlogPost</h2>
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in coordinatorblogeditform %}
+            <div class="rf-items">
+                <b>{{field.label}}</b>
+                {% if field.label == 'Title' %}
+                <br>
+                {% endif %}
+                {% if field.label == 'Content' %}
+                <br>
+                {% endif %}
+                {{field}}
+            </div>
+            {% endfor %}
+            <div class="form-submit">
+                <button type="submit" id="submit-btn"><h3>Save</h3></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

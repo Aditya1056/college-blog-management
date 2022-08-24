@@ -1,0 +1,160 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<div class="all-blogs">
+    <div class="empty"></div>
+    <div class="blogs-links">
+        <div class="all-blogs-link">
+            <a href="{% url 'all_questions' %}" title="See all questions"><h2><i class="fa-solid fa-angles-right"></i> All Questions <i class="fa-solid fa-circle-question"></i></h2></a>
+        </div>
+    </div>
+</div>
+
+
+<div class="all-blogposts-container">
+    <div class="all-blogposts-header">
+        <div class="home-link"><a href="{% url 'home' %}"><h3><i class="fa-solid fa-angles-left"></i> Home <i class="fa-solid fa-house"></i></h3></a></div>
+        <div class="all-blogposts-start"><h1>All BlogPosts</h1></div>
+    </div>
+    {% if request.user.is_authenticated %}
+        {% for blogpost, upvotable, downvotable in blogposts_votes %}
+        {% if blogpost.user|isCoordinator %}
+            <div class="blogpost-container coordinator">
+                <div class="blogpost-header">
+                    <div class="blogpost-title-header">
+                        <div class="blogpost-title"><h1>{{ blogpost.title }}</h1></div>
+                        {% if blogpost.importance == 'High' %}
+                        <div class="blogpost-importance" title="High Importance Post"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        {% endif %}
+                        {% if blogpost.importance == 'Medium' %}
+                        <div class="blogpost-importance" title="Medium Importance Post"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                        {% endif %}
+                        {% if blogpost.importance == 'Low' %}
+                        <div class="blogpost-importance" title="Low Importance Post"><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i><i class="fa-regular fa-star"></i></div>
+                        {% endif %}
+                    </div>
+                    <div class="blogpost-time"><i>{{ blogpost.updated_time }}</i></div>
+                </div>
+                <div class="blogpost-body">
+                    <div class="blogpost-content"><p>{{ blogpost.content }}</p></div>
+                </div>
+                <div class="blogpost-footer">
+                    {% if request.user.username == blogpost.user.username %}
+                    <div class="blogpost-username"><h4><i class="fa-solid fa-circle-right"></i> You</h4></div>
+                    {% else %}
+                    <div class="blogpost-username"><h4><a href="{% url 'profile' blogpost.id %}"><i class="fa-solid fa-circle-right"></i> @<u>{{ blogpost.user.username }} (Co)</u></a></h4></div>
+                    {% endif %}
+                    <div class="blogpost-votes">
+                        <div class="blogpost-upvotes">
+                            {% if upvotable %}
+                            <div class="blogpost-upvote-link">
+                                <a href="{% url 'upvote' blogpost.id %}" title="Like"><i class="fa-regular fa-thumbs-up thumbs"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="blogpost-upvote-link">
+                                <i class="fa-solid fa-thumbs-up thumbs" title="Liked"></i>
+                            </div>
+                            {% endif %}
+                            <div class="blogpost-upvote-count">{{ blogpost.upvotes }}</div>
+                        </div>
+                        <div class="blogpost-downvotes">
+                            {% if downvotable %}
+                            <div class="blogpost-downvote-link">
+                                <a href="{% url 'downvote' blogpost.id %}" title="Dislike"><i class="fa-regular fa-thumbs-down thumbs"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="blogpost-downvote-link">
+                                <i class="fa-solid fa-thumbs-down thumbs" title="Disliked"></i>
+                            </div>
+                            {% endif %}
+                            <div class="blogpost-downvote-count">{{ blogpost.downvotes }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if blogpost.user|isStudent %}
+            <div class="blogpost-container">
+                <div class="blogpost-header">
+                    <div class="blogpost-title-header">
+                        <div class="blogpost-title"><h1>{{ blogpost.title }}</h1></div>
+                    </div>
+                    <div class="blogpost-time"><i>{{ blogpost.updated_time }}</i></div>
+                </div>
+                <div class="blogpost-body">
+                    <div class="blogpost-content"><p>{{ blogpost.content }}</p></div>
+                </div>
+                <div class="blogpost-footer">
+                    {% if request.user.username == blogpost.user.username %}
+                    <div class="blogpost-username"><h4><i class="fa-solid fa-circle-right"></i> You</h4></div>
+                    {% else %}
+                    <div class="blogpost-username"><h4><a href="{% url 'profile' blogpost.id %}"><i class="fa-solid fa-circle-right"></i> @<u>{{ blogpost.user.username }}</u></a></h4></div>
+                    {% endif %}
+                    <div class="blogpost-votes">
+                        <div class="blogpost-upvotes">
+                            {% if upvotable %}
+                            <div class="blogpost-upvote-link">
+                                <a href="{% url 'upvote' blogpost.id %}" title="Like"><i class="fa-regular fa-thumbs-up thumbs"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="blogpost-upvote-link">
+                                <i class="fa-solid fa-thumbs-up thumbs" title="Liked"></i>
+                            </div>
+                            {% endif %}
+                            <div class="blogpost-upvote-count">{{ blogpost.upvotes }}</div>
+                        </div>
+                        <div class="blogpost-downvotes">
+                            {% if downvotable %}
+                            <div class="blogpost-downvote-link" title="Dislike">
+                                <a href="{% url 'downvote' blogpost.id %}"><i class="fa-regular fa-thumbs-down thumbs"></i></a>
+                            </div>
+                            {% else %}
+                            <div class="blogpost-downvote-link">
+                                <i class="fa-solid fa-thumbs-down thumbs" title="Disliked"></i>
+                            </div>
+                            {% endif %}
+                            <div class="blogpost-downvote-count">{{ blogpost.downvotes }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+        <div class="note">
+            <p><b>Note: </b>Post Titles having stars signifies the 'Low'/ 'Medium'/ 'High' importance of the post by Coordinator.</p>
+        </div>
+    {% else %}
+        {% for blogpost in blogposts %}
+            <div class="blogpost-container">
+                <div class="blogpost-header">
+                    <div class="blogpost-title"><h1>{{ blogpost.title }}</h1></div>
+                    <div class="blogpost-time"><i>{{ blogpost.updated_time }}</i></div>
+                </div>
+                <div class="blogpost-body">
+                    <div class="blogpost-content"><p>{{ blogpost.content }}</p></div>
+                </div>
+                <div class="blogpost-footer">
+                    <div class="blogpost-username"><h4>posted by {{ blogpost.user.username }}</h4></div>
+                    
+                    <div class="blogpost-votes">
+                        <div class="blogpost-upvotes">
+                            <div class="blogpost-upvotes-text">
+                                <h4>Upvotes</h4>
+                            </div>
+                            <div class="blogpost-upvote-count">{{ blogpost.upvotes }}</div>
+                        </div>
+                        <div class="blogpost-downvotes">
+                            <div class="blogpost-downvotes-text">
+                                <h4>Downvotes</h4>
+                            </div>
+                            <div class="blogpost-downvote-count">{{ blogpost.downvotes }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

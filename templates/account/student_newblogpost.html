@@ -1,0 +1,44 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<div class="register-container">
+    <div class="register-form">
+        <div class="header">
+            <h2>Create a New BlogPost</h2>
+        </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+        
+                <div class="rf-items">
+                    <label for="id_title"><b>Title</b></label>
+                    <br>
+                    <input type="text" name="title" maxlength="255" required id="id_title" class="rf-input" placeholder="BlogPost Title">
+                </div>
+        
+        
+                <div class="rf-items">
+                    <label for="id_content"><b>Content</b></label>
+                    <br>
+                    <textarea name="content" cols="40" rows="10" required id="id_content" class="rf-input" placeholder="BlogPost Content"></textarea>
+                </div>
+        
+        
+                <div class="rf-items">
+                    <label for="id_blogtype"><b>Blogtype</b></label>
+                    <select name="blogtype" required id="id_blogtype">
+                      <option value="" selected>---------</option>
+                      <option value="Question">Question</option>
+                      <option value="BlogPost">BlogPost</option>
+                    </select>
+                </div>
+        
+            <div class="form-submit">
+                <button type="submit" id="submit-btn"><h3>Create</h3></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<!-- <div class="error-messages">
+    {% for message in messages %}
+    
+    {{message}}
+    
+    {% endfor %}
+</div> -->
+
+<div class="login-form">
+    {% for message in messages %}
+    <div class="error-messages">
+        {{message}}
+    </div>
+    {% endfor %}
+    <div class="header">
+        <h1>Student / Co-ordinator Login</h1>
+    </div>
+    <div class="div-in">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-items">
+                <label for="username" class="form-item"><h2>Username</h2></label>
+                <input type="text" name="username" placeholder="Enter your username" required class="form-input">
+            </div>
+            <div class="form-items">
+                <label for="password" class="form-item"><h2>Password</h2></label>
+                <input type="password" name="password" placeholder='Enter your password' required class="form-input" autocomplete="new-password">
+            </div>
+        
+            <div class="form-submit">
+                <button type="submit" id="submit-btn"><h3>Login</h3></button>
+            </div>
+
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <div class="student-register">
+        <a class="links" href="{% url 'student-register' %}"><h3>Sign-Up as a Student</h3></a>
+    </div>
+    <div class="coordinator-register">
+        <a  class="links" href="{% url 'coordinator-register' %}"><h3>Sign-Up as a Co-ordinator</h3></a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+<div class="register-container">
+    
+    <div class="register-form">
+        {% for message in messages %}
+        <div class="error-messages">
+            {{message}}
+        </div>
+        {% endfor %}
+        <div class="header">
+            <h2>Student Registration</h2>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+                <div class="rf-items">
+                    <label for="id_name"><b>Name</b></label>
+                    <input type="text" name="name" maxlength="255" placeholder="Enter your Name" required id="id_name" class="rf-input">
+                </div>
+    
+    
+    
+                <div class="rf-items">
+                    <label for="id_email"><b>Email</b></label>
+                    <input type="email" name="email" maxlength="255" placeholder="Enter your Email" required id="id_email" class="rf-input">
+                </div>
+    
+    
+                <div class="rf-items">
+                    <label for="id_username"><b>Username</b></label>
+                    <input type="text" name="username" maxlength="150" placeholder="Set your username" required id="id_username" class="rf-input">
+                    <br>
+                    <span class="helptext"> Username Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+                </div>
+    
+    
+                <div class="rf-items">
+                    <label for="id_registration_number"><b>Registration number</b></label>
+                    <input type="text" name="registration_number" maxlength="255" placeholder="Enter your Reg.no" required id="id_registration_number" class="rf-input">
+                </div>
+    
+    
+                <div class="rf-items">
+                    <label for="id_password1"><b>Password</b></label>
+                    <input type="password" name="password1" placeholder="Set your Password" autocomplete="new-password" required id="id_password1" class="rf-input">
+                    <span class="helptext">
+                        <ul>
+                            <li>Your password can’t be too similar to your other personal information.</li>
+                            <li>Your password must contain at least 8 characters.</li>
+                            <li>Your password can’t be a commonly used password.</li>
+                            <li>Your password can’t be entirely numeric.</li>
+                        </ul>
+                    </span>
+                </div>
+    
+    
+                <div class="rf-items">
+                    <label for="id_password2"><b>Password confirmation</b></label>
+                    <input type="password" name="password2" placeholder="Re-enter your Password" autocomplete="new-password" required id="id_password2" class="rf-input">
+                    <span class="helptext">Enter the same password as before, for verification.</span>
+                </div>
+
+                <div class="form-submit">
+                    <button type="submit" id="submit-btn"><h3>Submit</h3></button>
+                </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

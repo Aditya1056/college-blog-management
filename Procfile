@@ -1,0 +1,1 @@
+web: gunicorn cobola:wsgi --log-file -
