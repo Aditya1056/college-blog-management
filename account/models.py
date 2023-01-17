@@ -47,6 +47,7 @@ class Coordinator(models.Model):
         return self.name
 
 class BlogPost(models.Model):
+    
     user = models.ForeignKey(User, on_delete = models.CASCADE)
 
     title = models.CharField(max_length=255, blank = False, null= False)

@@ -191,7 +191,7 @@ def renderLoginView(request):
             return redirect('home')
 
     else:
-        return render(request,APP_NAME + '/login.html')
+        return render(request, APP_NAME + '/login.html')
 
 
 
@@ -203,7 +203,7 @@ def renderLogoutView(request):
 
 
 def renderErrorPageView(request):
-    return render(request,APP_NAME + '/error_page.html')
+    return render(request, APP_NAME + '/error_page.html')
 
 
 def renderAllBlogPostView(request):
